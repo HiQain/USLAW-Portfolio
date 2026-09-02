@@ -1,0 +1,143 @@
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Roboto:wght@400;500;700&family=Roboto+Condensed:wght@400;600;700&display=swap");
+@import "tailwindcss";
+
+:root {
+  --background: #fafafa;
+  --foreground: #1a1a1a;
+  --brand: #b32134;
+  --brand-dark: #8f1a29;
+  --accent: #3b3b6d;
+  --font-acme: "Acme", sans-serif;
+  --font-roboto: "Roboto", sans-serif;
+  --font-roboto-condensed: "Roboto Condensed", sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
+  --color-accent: var(--accent);
+  --font-display: var(--font-acme);
+  --font-sans: var(--font-roboto);
+  --font-condensed: var(--font-roboto-condensed);
+}
+
+html {
+  min-height: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.hero-surface {
+  background: linear-gradient(135deg, var(--accent) 0%, #30305a 58%, var(--brand) 150%);
+}
+
+::selection {
+  background: var(--brand);
+  color: #fff;
+}
+
+.section-heading {
+  font-family: var(--font-acme);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  display: block;
+  width: fit-content;
+  /* The banner image is a wide, fixed-ratio graphic - without a floor here, short
+     headings (eg. "CLEANING") shrink the box down with them and the banner gets
+     visibly squished to fit. */
+  min-width: 16rem;
+  max-width: calc(100vw - 2rem);
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  padding: 1.1rem 3rem;
+  background-image: linear-gradient(90deg, var(--brand), var(--accent));
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  -webkit-mask-image: url("/images/heading-banner.png");
+  -webkit-mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-image: url("/images/heading-banner.png");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+@media (min-width: 640px) {
+  .section-heading {
+    min-width: 24rem;
+  }
+}
+
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Pans a tall iframe upward inside a fixed-height, overflow-hidden viewport to
+   simulate the embedded site auto-scrolling, then reverses - see ProjectModal. */
+@keyframes website-autoscroll {
+  0%,
+  8% {
+    transform: translateY(0);
+  }
+  46%,
+  54% {
+    transform: translateY(-1600px);
+  }
+  92%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+.website-autoscroll-frame {
+  animation: website-autoscroll 22s ease-in-out infinite;
+}
+
+/* Mobile preview box is shorter, so pan a shorter distance too - otherwise the loop
+   scrolls past the real page's content into blank iframe padding below it. */
+@media (max-width: 639px) {
+  .website-autoscroll-frame {
+    animation-name: website-autoscroll-mobile;
+  }
+}
+
+@keyframes website-autoscroll-mobile {
+  0%,
+  8% {
+    transform: translateY(0);
+  }
+  46%,
+  54% {
+    transform: translateY(-700px);
+  }
+  92%,
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Continuously spins the Merchandise/Branding preview card around its Y axis -
+   see the isFlipCard branch in ProjectModal. */
+@keyframes spin3d {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
